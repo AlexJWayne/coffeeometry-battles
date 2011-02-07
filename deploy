@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+git stash
+git co gh-pages
+git merge master
+git push origin gh-pages
+git co master
+git stash apply
