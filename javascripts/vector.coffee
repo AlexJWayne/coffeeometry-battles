@@ -24,12 +24,15 @@ class Vector
   
   distance: (other) ->
     @clone().subtract(other).length()
+  
+  angle: ->
+    Math.atan(@y / @x) * 180/Math.PI
 
 
 Vector.zero   = -> new Vector()
-Vector.up     = -> new Vector  0,  1
-Vector.down   = -> new Vector  0, -1
-Vector.left   = -> new Vector -1,  0
-Vector.right  = -> new Vector  1,  0
+Vector.up     = -> new Vector( 0,  1)
+Vector.down   = -> new Vector( 0, -1)
+Vector.left   = -> new Vector(-1,  0)
+Vector.right  = -> new Vector( 1,  0)
 
 @Vector = Vector

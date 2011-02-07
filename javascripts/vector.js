@@ -32,6 +32,9 @@
     Vector.prototype.distance = function(other) {
       return this.clone().subtract(other).length();
     };
+    Vector.prototype.angle = function() {
+      return Math.atan(this.y / this.x) * 180 / Math.PI;
+    };
     return Vector;
   })();
   Vector.zero = function() {

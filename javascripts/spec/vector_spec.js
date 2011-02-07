@@ -104,12 +104,19 @@
           return expect(ret).toBe(v);
         });
       });
-      return describe('distance()', function() {
-        return it('should retun the distance from another vector', function() {
+      describe('distance()', function() {
+        return it('should return the distance from another vector', function() {
           var v1, v2;
           v1 = new Vector(5, 0);
           v2 = new Vector(5, 5);
           return expect(v1.distance(v2)).toEqual(5);
+        });
+      });
+      return describe('angle()', function() {
+        return it('should return the angle in degrees', function() {
+          expect(new Vector(1, 1).angle()).toEqual(45);
+          expect(new Vector(0, 1).angle()).toEqual(90);
+          return expect(new Vector(0, -1).angle()).toEqual(-90);
         });
       });
     });
