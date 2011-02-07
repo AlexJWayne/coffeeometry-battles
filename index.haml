@@ -1,0 +1,11 @@
+!!!5
+%html
+  %head
+    %title It's a foo!
+    %script( src="javascripts/lib/head.js" )
+    :javascript
+      head.js('javascripts/vector.js?'+ new Date().getTime(), function() {
+        console.log(new Vector(1, 2));
+      });
+    
+  %body

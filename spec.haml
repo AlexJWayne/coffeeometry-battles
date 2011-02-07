@@ -1,0 +1,25 @@
+!!!5
+%html
+  %head
+    %title It's a foo!
+    %link( rel="stylesheet" href="javascripts/lib/jasmine/jasmine.css")
+    
+    %script( src="javascripts/lib/head.js" )
+    :javascript
+      var now = new Date().getTime();
+      head.js(
+        'javascripts/vector.js?'+ now,
+        
+        'javascripts/lib/jasmine/jasmine.js',
+        'javascripts/lib/jasmine/jasmine-html.js',
+        
+        'javascripts/spec/vector_spec.js?'+ now,
+        
+        function() {
+          jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+          jasmine.getEnv().execute();
+        }
+      );
+    
+  %body
+    %h1 Testing...
