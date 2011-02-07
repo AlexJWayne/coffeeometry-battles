@@ -81,6 +81,12 @@ describe 'Vector', ->
         expect(v.y).toEqual 0
         expect(v.length()).toEqual 1
         expect(ret).toBe v
+    
+    describe 'distance()', ->
+      it 'should retun the distance from another vector', ->
+        v1 = new Vector(5, 0)
+        v2 = new Vector(5, 5)
+        expect(v1.distance(v2)).toEqual 5
   
   it 'should be chainable', ->
     v = new Vector(10, 0)

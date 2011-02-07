@@ -29,6 +29,9 @@
     Vector.prototype.normalize = function() {
       return this.scale(1 / this.length());
     };
+    Vector.prototype.distance = function(other) {
+      return this.clone().subtract(other).length();
+    };
     return Vector;
   })();
   Vector.zero = function() {

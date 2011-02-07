@@ -93,7 +93,7 @@
           return expect(ret).toBe(v);
         });
       });
-      return describe('normalize()', function() {
+      describe('normalize()', function() {
         return it('should force the vector to a length of 1', function() {
           var ret, v;
           v = new Vector(100, 0);
@@ -102,6 +102,14 @@
           expect(v.y).toEqual(0);
           expect(v.length()).toEqual(1);
           return expect(ret).toBe(v);
+        });
+      });
+      return describe('distance()', function() {
+        return it('should retun the distance from another vector', function() {
+          var v1, v2;
+          v1 = new Vector(5, 0);
+          v2 = new Vector(5, 5);
+          return expect(v1.distance(v2)).toEqual(5);
         });
       });
     });

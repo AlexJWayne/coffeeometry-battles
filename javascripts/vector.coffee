@@ -21,6 +21,9 @@ class Vector
 
   normalize: ->
     @scale 1/@length()
+  
+  distance: (other) ->
+    @clone().subtract(other).length()
 
 
 Vector.zero   = -> new Vector()
