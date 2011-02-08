@@ -2,19 +2,22 @@
 <html>
   <head>
     <title>It's a foo!</title>
-    <link href='javascripts/lib/jasmine/jasmine.css' rel='stylesheet' />
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:regular,bold' rel='stylesheet' type='text/css' />
+    <link href='stylesheets/reset.css' rel='stylesheet' type='text/css' />
+    <link href='stylesheets/main.css' rel='stylesheet' type='text/css' />
+    <link href='javascripts/lib/jasmine/jasmine.css' rel='stylesheet' type='text/css' />
     <script src='javascripts/lib/head.js'></script>
     <script type='text/javascript'>
       //<![CDATA[
         var now = new Date().getTime();
         head.js(
           'javascripts/vector.js?'+ now,
-          
+        
           'javascripts/lib/jasmine/jasmine.js',
           'javascripts/lib/jasmine/jasmine-html.js',
-          
+        
           'javascripts/spec/vector_spec.js?'+ now,
-          
+        
           function() {
             jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
             jasmine.getEnv().execute();
@@ -24,6 +27,19 @@
     </script>
   </head>
   <body>
-    <h1>Testing...</h1>
+    <div id='wrapper'>
+      <header>
+        <h1>
+          Coffeeometry
+          <span>Battles</span>
+        </h1>
+      </header>
+      <canvas id='canvas'></canvas>
+      <footer>
+        <p>
+          <a href='spec.html'>Run specs!</a>
+        </p>
+      </footer>
+    </div>
   </body>
 </html>

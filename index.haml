@@ -2,6 +2,8 @@
 %html
   %head
     %title It's a foo!
+    - %w( http://fonts.googleapis.com/css?family=Orbitron:regular,bold stylesheets/reset.css stylesheets/main.css ).each do |path|
+      %link{ :href => path, :rel => 'stylesheet', :type => 'text/css' }
     %script( src="javascripts/lib/head.js" )
     :javascript
       head.js('javascripts/vector.js?'+ new Date().getTime(), function() {
@@ -9,8 +11,13 @@
       });
     
   %body
-    %h2
-      Nothing to see here quite yet...
-    
-    %p
-      %a( href="spec.html" ) Run specs!
+    #wrapper
+      %header
+        %h1
+          Coffeeometry
+          %span Battles
+      %canvas#canvas
+      
+      %footer
+        %p
+          %a( href="spec.html" ) Run specs!

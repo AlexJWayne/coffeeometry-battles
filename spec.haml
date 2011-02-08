@@ -2,24 +2,33 @@
 %html
   %head
     %title It's a foo!
-    %link( rel="stylesheet" href="javascripts/lib/jasmine/jasmine.css")
-    
+    - %w( http://fonts.googleapis.com/css?family=Orbitron:regular,bold stylesheets/reset.css stylesheets/main.css javascripts/lib/jasmine/jasmine.css ).each do |path|
+      %link{ :href => path, :rel => 'stylesheet', :type => 'text/css' }
     %script( src="javascripts/lib/head.js" )
     :javascript
       var now = new Date().getTime();
       head.js(
         'javascripts/vector.js?'+ now,
-        
+
         'javascripts/lib/jasmine/jasmine.js',
         'javascripts/lib/jasmine/jasmine-html.js',
-        
+
         'javascripts/spec/vector_spec.js?'+ now,
-        
+
         function() {
           jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
           jasmine.getEnv().execute();
         }
-      );
+      );    
     
   %body
-    %h1 Testing...
+    #wrapper
+      %header
+        %h1
+          Coffeeometry
+          %span Battles
+      %canvas#canvas
+      
+      %footer
+        %p
+          %a( href="spec.html" ) Run specs!
