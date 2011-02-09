@@ -5,11 +5,13 @@
       this.node = document.getElementById(this.id);
       this.ctx = this.node.getContext('2d');
       this.ctx.translate(this.node.width / 2, this.node.height / 2);
+      this.ctx.scale(this.node.width / 200, this.node.height / 200);
     }
     Canvas.prototype.draw = function() {
       this.ctx.fillStyle = "rgb(200,0,0)";
-      this.ctx.fillCircle(new Vector(-90, -90), 10);
-      return this.ctx.fillCircle(new Vector(90, 90), 10);
+      this.ctx.fillCircle(v(-100, -100), 10);
+      this.ctx.fillCircle(v(100, 100), 10);
+      return this.ctx.fillCircle(v(0, 0), 10);
     };
     return Canvas;
   })();
