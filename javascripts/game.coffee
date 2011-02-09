@@ -50,6 +50,8 @@ class @Game
   init: ->
     @canvas = new Canvas()
     @ctx    = @canvas.ctx
+    
+    @canvas.draw()
   
   
 

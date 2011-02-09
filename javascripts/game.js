@@ -47,7 +47,8 @@
     };
     Game.prototype.init = function() {
       this.canvas = new Canvas();
-      return this.ctx = this.canvas.ctx;
+      this.ctx = this.canvas.ctx;
+      return this.canvas.draw();
     };
     return Game;
   })();

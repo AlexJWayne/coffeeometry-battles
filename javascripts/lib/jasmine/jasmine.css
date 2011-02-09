@@ -92,6 +92,7 @@
 }
 
 .messages {
+  color: black;
   border-left: 1px dashed gray;
   padding-left: 1em;
   padding-right: 1em;

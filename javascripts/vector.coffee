@@ -1,6 +1,6 @@
 class @Vector
   constructor: (@x = 0, @y = 0) ->
-
+  
   clone:  -> new Vector(@x, @y)
   length: -> Math.sqrt @x*@x + @y*@y
 
@@ -34,3 +34,6 @@ class @Vector
 @Vector.down   = -> new Vector( 0, -1)
 @Vector.left   = -> new Vector(-1,  0)
 @Vector.right  = -> new Vector( 1,  0)
+
+# Convenience shortcut
+@v = (x, y)-> new Vector(x, y)

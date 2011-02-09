@@ -51,4 +51,7 @@
   this.Vector.right = function() {
     return new Vector(1, 0);
   };
+  this.v = function(x, y) {
+    return new Vector(x, y);
+  };
 }).call(this);
