@@ -1,6 +1,5 @@
 (function() {
-  var Vector;
-  Vector = (function() {
+  this.Vector = (function() {
     function Vector(x, y) {
       this.x = x != null ? x : 0;
       this.y = y != null ? y : 0;
@@ -37,20 +36,19 @@
     };
     return Vector;
   })();
-  Vector.zero = function() {
+  this.Vector.zero = function() {
     return new Vector();
   };
-  Vector.up = function() {
+  this.Vector.up = function() {
     return new Vector(0, 1);
   };
-  Vector.down = function() {
+  this.Vector.down = function() {
     return new Vector(0, -1);
   };
-  Vector.left = function() {
+  this.Vector.left = function() {
     return new Vector(-1, 0);
   };
-  Vector.right = function() {
+  this.Vector.right = function() {
     return new Vector(1, 0);
   };
-  this.Vector = Vector;
 }).call(this);

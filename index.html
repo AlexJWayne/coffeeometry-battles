@@ -8,8 +8,8 @@
     <script src='javascripts/lib/head.js'></script>
     <script type='text/javascript'>
       //<![CDATA[
-        head.js('javascripts/vector.js?'+ new Date().getTime(), function() {
-          console.log(new Vector(1, 2));
+        head.js('javascripts/game.js?'+ new Date().getTime(), function() {
+          new Game();
         });
       //]]>
     </script>
@@ -25,7 +25,7 @@
       <canvas id='canvas'></canvas>
       <footer>
         <p>
-          <a href='spec.html'>Run specs!</a>
+          <a href='?'>Run specs!</a>
         </p>
       </footer>
     </div>

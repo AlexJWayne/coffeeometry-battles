@@ -6,8 +6,8 @@
       %link{ :href => path, :rel => 'stylesheet', :type => 'text/css' }
     %script( src="javascripts/lib/head.js" )
     :javascript
-      head.js('javascripts/vector.js?'+ new Date().getTime(), function() {
-        console.log(new Vector(1, 2));
+      head.js('javascripts/game.js?'+ new Date().getTime(), function() {
+        new Game();
       });
     
   %body
@@ -20,4 +20,4 @@
       
       %footer
         %p
-          %a( href="spec.html" ) Run specs!
+          %a( href="?" ) Run specs!

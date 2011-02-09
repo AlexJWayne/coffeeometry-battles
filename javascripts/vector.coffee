@@ -1,4 +1,4 @@
-class Vector
+class @Vector
   constructor: (@x = 0, @y = 0) ->
 
   clone:  -> new Vector(@x, @y)
@@ -29,10 +29,8 @@ class Vector
     Math.atan(@y / @x) * 180/Math.PI
 
 
-Vector.zero   = -> new Vector()
-Vector.up     = -> new Vector( 0,  1)
-Vector.down   = -> new Vector( 0, -1)
-Vector.left   = -> new Vector(-1,  0)
-Vector.right  = -> new Vector( 1,  0)
-
-@Vector = Vector
+@Vector.zero   = -> new Vector()
+@Vector.up     = -> new Vector( 0,  1)
+@Vector.down   = -> new Vector( 0, -1)
+@Vector.left   = -> new Vector(-1,  0)
+@Vector.right  = -> new Vector( 1,  0)
