@@ -1,25 +1,29 @@
-# Main application singleton
+# Main application singleton.  Handles initialization and all game state.
 class @Game
-  
-  # All scripts required
+
+  #### Initialization
+
+  # Set a list of scripts that we have to load.
   requires = [
     'lib/underscore'
     'vector'
     'canvas'
   ]
   
-  # Create the singleton instance
+  # Create the singleton instance.
   constructor: ->
     Game.game = this
     @load()
   
-  # Load scripts, and run specs
+  # Load scripts, then initialize the game when ready.  If a spec run is
+  # desired, then start it.
   load: ->
     # Save a cache buster
     now = new Date().getTime()
     
     # Inflate js script names into full paths
-    scripts = ("javascripts/#{script}.js?#{now}" for script in requires)
+    scripts = for script in requires
+      "javascripts/#{script}.js?#{now}"
     
     # Add specs in if this is a spec run
     if Game.runSpecs
@@ -47,13 +51,25 @@ class @Game
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter())
         jasmine.getEnv().execute()
   
+  # Initialize the game after all scripts are loaded.
   init: ->
+    # Get canvas and rendering context.
     @canvas = new Canvas()
     @ctx    = @canvas.ctx
+    @fps    = 60
     
+    # Start the main game loop
+    @timer  = setInterval =>
+      @update()
+      @render()
+    , 1000/@fps
+  
+  update: ->
+    @ctx.rotate 10/@fps * Math.PI/180
+    
+  render: ->
     @canvas.draw()
   
   
-
-# A query string present means to run specs
+# If the index page url has a query string, it means a spec run is expected.
 @Game.runSpecs = window.location.href.indexOf('?') > 0

@@ -11,8 +11,8 @@ describe 'Vector', ->
       expect(v1.y).toEqual 0
   
     it 'should have a convenience shortcut v()', ->
-      expect(v().length()).toEqual 0
-      expect(v(3,4).length()).toEqual 5
+      expect(v().length).toEqual 0
+      expect(v(3,4).length).toEqual 5
   
   describe 'static methods', ->
     it 'Vector.zero() should make a zero length vector', ->
@@ -48,11 +48,6 @@ describe 'Vector', ->
         v2.x = 10
         expect(v1.x).not.toEqual v2.x
   
-    describe 'length()', ->
-      it 'should return the length', ->
-        v1 = v 3, 4
-        expect(v1.length()).toEqual 5
-  
     describe 'add()', ->
       it 'should add another vector to this one', ->
         v1 = v(3, 4)
@@ -83,7 +78,7 @@ describe 'Vector', ->
         ret = v1.normalize()
         expect(v1.x).toEqual 1
         expect(v1.y).toEqual 0
-        expect(v1.length()).toEqual 1
+        expect(v1.length).toEqual 1
         expect(ret).toBe v1
     
     describe 'distance()', ->
@@ -92,12 +87,44 @@ describe 'Vector', ->
         v2 = v(5, 5)
         expect(v1.distance(v2)).toEqual 5
     
-    describe 'angle()', ->
+    describe 'equal()', ->
+      it 'should return true for equal vectors', ->
+        expect(v(1,2).equal(v(1,2))).toBeTruthy()
+      
+      it 'should return false for unequal vectors', ->
+        expect(v(1,2).equal(v(3,2))).toBeFalsy()
+    
+  describe 'properties', ->
+    describe 'angle', ->
       it 'should return the angle in degrees', ->
-        expect(v(1,  1).angle()).toEqual  45
-        expect(v(0,  1).angle()).toEqual  90
-        expect(v(0, -1).angle()).toEqual -90
-  
+        expect(v(1, 1).angle).toEqual  45
+        expect(v(0, 1).angle).toEqual  90
+        expect(v(0,-1).angle).toEqual -90
+      
+      it 'should set the angle in degrees', ->
+        v1 = v(0,1000)
+        v1.angle = 45
+        expect(Math.round v1.angle).toEqual 45
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = 90
+        expect(Math.round v1.angle).toEqual 90
+        expect(Math.round v1.length).toEqual 1000
+      
+    describe 'length', ->
+      it 'should return the length', ->
+        v1 = v(3,4)
+        expect(v1.length).toEqual 5
+      
+      it 'should set the length', ->
+        v1 = v(3,4)
+        v1.scale 10
+        expect(v1.length).toEqual 50
+        v1.length = 5
+        expect(v1.length).toEqual 5
+        expect(v1.x).toEqual 3
+        expect(v1.y).toEqual 4
+    
   it 'should be chainable', ->
     v1 = v(10, 0)
       .normalize()

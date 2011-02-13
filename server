@@ -1,124 +1,31 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'fssm'
+require 'sinatra'
+
 require 'active_support'
 
-require 'coffee-script'
-require 'haml'
-require 'sass'
+set :public, File.dirname(__FILE__)
+set :views,  File.dirname(__FILE__)
 
-module Colors
-  def color(txt, code)
-    "\033[#{ code }m#{ txt }\033[0m"
-  end
-  def red(txt)
-    color txt, 31
-  end
-  def green(txt)
-    color txt, 32
-  end
-  def yellow(txt)
-    color txt, 33
+conversions = {
+  :haml   => :html,
+  :coffee => :js,
+  :sass   => :css,
+}
+
+conversions.each do |src, dst|
+  get %r{/(.+)\.#{dst}} do
+    send src, params[:captures].first.to_sym
   end
 end
-include Colors
 
-def remove(base, relative)
-  src_ext = relative.match(/\.(\w+)$/)[1]
-  dst_ext = case src_ext
-    when 'coffee': 'js'
-    when 'sass'  : 'css'
-    when 'haml'  : 'html'
-  end
-  
-  dst_file = relative.gsub(/\.(\w+)$/, ".#{dst_ext}")
-  File.delete File.join(base, dst_file)
-  puts yellow("DELETED  #{dst_file}")
+get '/' do
+  haml :index
 end
 
-def success(type, relative)
-  puts green("Compiled #{type}: #{relative}")
+get '/docs' do
+  `docco javascripts/*.coffee`
+  puts "Generated Docs!"
+  redirect "/docs/#{ Dir.entries('docs').find { |file| file =~ /\.html/ } }"
 end
-
-def failure(type, relative, error)
-  puts red(  "FAILED!  #{type}: #{relative} #{error}")
-end
-
-# compile coffee
-def coffee(base, relative)
-  path = File.join(base, relative)
-  js = CoffeeScript.compile File.read(path)
-  File.open path.gsub(/\.coffee$/, '.js'), 'w+' do |f|
-    f.write js
-  end
-  success 'Coffee', relative
-rescue CoffeeScript::CompilationError => e
-  failure 'Coffee', relative, e
-end
-
-# compile sass
-def sass(base, relative)
-  path = File.join(base, relative)
-  css = Sass::Engine.new(File.read(path), { :filename => path }).render
-  File.open path.gsub(/\.sass$/, '.css'), 'w+' do |f|
-    f.write css
-  end
-  success 'SASS', relative
-rescue Sass::SyntaxError => e
-  failure 'SASS', relative, "#{e}\n         #{e.backtrace[0]}"
-end
-
-# compile haml
-def haml(base, relative)
-  path = File.join(base, relative)
-  html = Haml::Engine.new(File.read(path), { :filename => path }).render
-  File.open path.gsub(/\.haml$/, '.html'), 'w+' do |f|
-    f.write html
-  end
-  success 'HAML', relative
-rescue Haml::SyntaxError => e
-  failure 'HAML', relative, "#{e}\n         #{e.backtrace[0]}"
-end
-
-
-puts "\nWatching...\n"
-
-monitor = FSSM::Monitor.new
-monitor.path '.' do
-  glob '**/*.coffee'
-
-  update do |base, relative|
-    coffee base, relative
-  end
-  
-  delete do |base, relative|
-    remove base, relative
-  end
-end
-  
-monitor.path '.' do
-  glob '**/*.sass'
-
-  update do |base, relative|
-    sass base, relative
-  end
-  
-  delete do |base, relative|
-    remove base, relative
-  end
-end
-  
-monitor.path '.' do
-  glob '**/*.haml'
-
-  update do |base, relative|
-    haml base, relative
-  end
-  
-  delete do |base, relative|
-    remove base, relative
-  end
-end
-  
-monitor.run
