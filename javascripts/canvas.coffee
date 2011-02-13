@@ -13,12 +13,12 @@ class @Canvas
   
   # Draw one frame
   draw: ->
-    @ctx.clearRect -100, -100, 200, 200
+    @ctx.clearRect -200, -200, 400, 400
     
     @ctx.fillStyle = "rgb(200,0,0)"
-    @ctx.fillCircle v(-100, -100), 10
-    @ctx.fillCircle v( 100,  100), 10
-    @ctx.fillCircle v(   0,    0), 10
+    @ctx.fillCircle v(-75, -75), 10
+    @ctx.fillCircle v( 75,  75), 10
+    @ctx.fillCircle v(  0,   0), 10
 
 #### CanvasRenderingContext2D Extensions
 
