@@ -64,7 +64,8 @@ class @Game
     
     # Start the main game loop
     @start()
-    
+  
+  # Sets up the main loop for updating and rendering
   start: ->
     unless @timer
       @timer = setInterval =>
@@ -72,13 +73,16 @@ class @Game
         @render()
       , Game.perMS
   
+  # Stops all updating and rendering
   stop: ->
     clearInterval @timer
     @timer = null
   
+  # Update one frame
   update: ->
     @stage.update()
-    
+  
+  # Render one frame
   render: ->
     @canvas.clear()
     @stage.render(@ctx)
@@ -87,7 +91,6 @@ class @Game
 Game.fps    = 60
 Game.perS   = 1/Game.fps
 Game.perMS  = 1000/Game.fps
-
 
 # If the index page url has a query string, it means a spec run is expected.
 @Game.runSpecs = window.location.href.indexOf('?') > 0
