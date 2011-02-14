@@ -57,24 +57,32 @@ class @Game
     @canvas = new Canvas()
     @ctx    = @canvas.ctx
     @fps    = 60
+    @perS   = 1/@fps
+    @perMS  = 1000/@fps
     
     # Start the main game loop
-    @timer  = setInterval =>
-      @update()
-      @render()
-    , 1000/@fps
+    @start()
     
     # Setup some game state
     dotQty = Math.floor(Math.random() * 10 + 3)
-    @dotSpeed = 45
+    @dotSpeed = 30
     @dots = for i in [0...dotQty]
       dot = v(0, 75)
       dot.angle = i * 360/dotQty
       dot
-    
+  
+  start: ->
+    @timer = setInterval =>
+      @update()
+      @render()
+    , @perMS
+  
+  stop: ->
+    clearInterval @timer
+  
   update: ->
     for dot in @dots
-      dot.angle += 45/@fps
+      dot.angle += @dotSpeed * @perS
     
   render: ->
     @canvas.draw()
