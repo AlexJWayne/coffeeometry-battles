@@ -8,6 +8,8 @@ class @Game
     'lib/underscore'
     'vector'
     'canvas'
+    'stage'
+    'player'
   ]
   
   # Create the singleton instance.
@@ -56,41 +58,36 @@ class @Game
     # Get canvas and rendering context.
     @canvas = new Canvas()
     @ctx    = @canvas.ctx
-    @fps    = 60
-    @perS   = 1/@fps
-    @perMS  = 1000/@fps
+    
+    # Setup the stage
+    @stage  = new Stage()
     
     # Start the main game loop
     @start()
     
-    # Setup some game state
-    dotQty = Math.floor(Math.random() * 10 + 3)
-    @dotSpeed = 30
-    @dots = for i in [0...dotQty]
-      dot = v(0, 75)
-      dot.angle = i * 360/dotQty
-      dot
-  
   start: ->
     unless @timer
       @timer = setInterval =>
         @update()
         @render()
-      , @perMS
+      , Game.perMS
   
   stop: ->
     clearInterval @timer
     @timer = null
   
   update: ->
-    for dot in @dots
-      dot.angle += @dotSpeed * @perS
+    @stage.update()
     
   render: ->
-    @canvas.draw()
-    @ctx.fillStyle = "rgb(200,0,0)"
-    for dot in @dots
-      @ctx.fillCircle dot, 6
-  
+    @canvas.clear()
+    @stage.render(@ctx)
+
+# Timing constants
+Game.fps    = 60
+Game.perS   = 1/Game.fps
+Game.perMS  = 1000/Game.fps
+
+
 # If the index page url has a query string, it means a spec run is expected.
 @Game.runSpecs = window.location.href.indexOf('?') > 0

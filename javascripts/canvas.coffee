@@ -12,8 +12,8 @@ class @Canvas
     @ctx.scale     @node.width/200, -@node.height/200
   
   # Draw one frame
-  draw: ->
-    @ctx.clearRect -100, -100, 200, 200    
+  clear: ->
+    @ctx.clearRect -100, -100, 200, 200
 
 #### CanvasRenderingContext2D Extensions
 

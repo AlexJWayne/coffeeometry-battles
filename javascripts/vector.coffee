@@ -32,7 +32,9 @@ class @Vector
   normalize: ->
     @scale 1/@length
   
-
+  toString: ->
+    "<Vector: #{@x} #{@y}>"
+  
   #### Comparisons
   
   # Return true if the other vector hs the same values
@@ -68,6 +70,13 @@ class @Vector
 
 # Set the length of this vector, keeping its curent angle
 @Vector::__defineSetter__ 'length', (newLength) ->
+  if newLength == 0
+    @scale 0
+    return
+  
+  else if @length == 0
+    @x = 1
+  
   @scale newLength/@length
 
   

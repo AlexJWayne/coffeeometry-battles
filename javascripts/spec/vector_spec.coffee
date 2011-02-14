@@ -94,6 +94,10 @@ describe 'Vector', ->
       it 'should return false for unequal vectors', ->
         expect(v(1,2).equal(v(3,2))).toBeFalsy()
     
+    describe 'toString()', ->
+      it 'should return a vector string', ->
+        expect(v(3,4).toString()).toEqual("<Vector: 3 4>")
+    
   describe 'properties', ->
     describe 'angle', ->
       it 'should return the angle in degrees', ->
@@ -145,6 +149,11 @@ describe 'Vector', ->
         expect(v1.length).toEqual 5
         expect(v1.x).toEqual 3
         expect(v1.y).toEqual 4
+      
+      it 'should allow zero to be set for length', ->
+        v1 = v(3,4)
+        v1.length = 0
+        expect(v1.length).toEqual 0
     
   it 'should be chainable', ->
     v1 = v(10, 0)
