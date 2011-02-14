@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>It's a foo!</title>
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:regular,bold' rel='stylesheet' type='text/css' />
+    <link href='stylesheets/reset.css' rel='stylesheet' type='text/css' />
+    <link href='stylesheets/main.css' rel='stylesheet' type='text/css' />
+    <script src='javascripts/lib/head.js'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        head.js('javascripts/game.js?'+ new Date().getTime(), function() {
+          new Game();
+        });
+      //]]>
+    </script>
+  </head>
+  <body>
+    <div id='wrapper'>
+      <header>
+        <h1>
+          Coffeeometry
+          <span>Battles</span>
+        </h1>
+      </header>
+      <canvas height='600' id='canvas' width='600'></canvas>
+      <footer>
+        <ul>
+          <li>
+            <a href='#' onclick='Game.game.start(); return false'>Go</a>
+            |
+            <a href='#' onclick='Game.game.stop(); return false;'>Pause</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href='.'>Index</a>
+          </li>
+          <li>
+            <a href='?'>Specs</a>
+          </li>
+          <li>
+            <a href='docs'>Docs</a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+  </body>
+</html>
