@@ -72,13 +72,15 @@ class @Game
       dot
   
   start: ->
-    @timer = setInterval =>
-      @update()
-      @render()
-    , @perMS
+    unless @timer
+      @timer = setInterval =>
+        @update()
+        @render()
+      , @perMS
   
   stop: ->
     clearInterval @timer
+    @timer = null
   
   update: ->
     for dot in @dots
