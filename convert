@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'active_support'
+
+require 'coffee-script'
+require 'haml'
+require 'sass'
+
+
+def recurse(path)
+  Dir.entries(path).each do |filename|
+    next if filename =~ /^\./
+    filepath = File.join(path, filename)
+    
+    if filename =~ /\.coffee$/
+      File.open filepath.gsub(/\.coffee$/, '.js'), 'w+' do |f|
+        f.write CoffeeScript.compile(File.read(filepath))
+      end
+    
+    elsif filename =~ /\.haml$/
+      File.open filepath.gsub(/\.haml$/, '.html'), 'w+' do |f|
+        f.write Haml::Engine.new(File.read(filepath), { :filename => filepath }).render
+      end
+    
+    elsif filename =~ /\.sass$/
+      File.open filepath.gsub(/\.sass$/, '.css'), 'w+' do |f|
+        f.write Sass::Engine.new(File.read(filepath), { :filename => filepath }).render
+      end
+    
+    elsif File.directory?(filepath)
+      recurse filepath
+      
+    end
+  end
+end
+
+recurse '.'
