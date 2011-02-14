@@ -49,14 +49,17 @@ class @Vector
 
 # Return the angle of this vector
 @Vector::__defineGetter__ 'angle', ->
-  Math.atan(@y / @x) * 180/Math.PI
+  result = Math.atan2(@y, @x) * 180/Math.PI
+  result += 360 if result < 0
+  result
 
 # Set the angle of this vector, keeping its current length
 @Vector::__defineSetter__ 'angle', (newAngle) ->
-  savedLength = @length
-  @y = Math.tan newAngle * Math.PI/180
-  @x = 1/@y
-  @length = savedLength
+  [@x, @y, @length] = [
+    Math.cos(newAngle * Math.PI/180),
+    Math.sin(newAngle * Math.PI/180),
+    @length
+  ]
   
 
 # Return the length of this vector

@@ -63,13 +63,24 @@ class @Game
       @update()
       @render()
     , 1000/@fps
-  
+    
+    # Setup some game state
+    dotQty = Math.floor(Math.random() * 10 + 3)
+    @dotSpeed = 45
+    @dots = for i in [0...dotQty]
+      dot = v(0, 75)
+      dot.angle = i * 360/dotQty
+      dot
+    
   update: ->
-    @ctx.rotate 10/@fps * Math.PI/180
+    for dot in @dots
+      dot.angle += 45/@fps
     
   render: ->
     @canvas.draw()
-  
+    @ctx.fillStyle = "rgb(200,0,0)"
+    for dot in @dots
+      @ctx.fillCircle dot, 6
   
 # If the index page url has a query string, it means a spec run is expected.
 @Game.runSpecs = window.location.href.indexOf('?') > 0

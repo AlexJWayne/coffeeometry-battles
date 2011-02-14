@@ -97,9 +97,10 @@ describe 'Vector', ->
   describe 'properties', ->
     describe 'angle', ->
       it 'should return the angle in degrees', ->
-        expect(v(1, 1).angle).toEqual  45
-        expect(v(0, 1).angle).toEqual  90
-        expect(v(0,-1).angle).toEqual -90
+        expect(v( 1, 1).angle).toEqual  45
+        expect(v( 0, 1).angle).toEqual  90
+        expect(v( 0,-1).angle).toEqual 270
+        expect(v(-1,-1).angle).toEqual 225
       
       it 'should set the angle in degrees', ->
         v1 = v(0,1000)
@@ -109,6 +110,26 @@ describe 'Vector', ->
         
         v1.angle = 90
         expect(Math.round v1.angle).toEqual 90
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = 135
+        expect(Math.round v1.angle).toEqual 135
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = 180
+        expect(Math.round v1.angle).toEqual 180
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = 225
+        expect(Math.round v1.angle).toEqual 225
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = -90
+        expect(Math.round v1.angle).toEqual 270
+        expect(Math.round v1.length).toEqual 1000
+        
+        v1.angle = -45
+        expect(Math.round v1.angle).toEqual 315
         expect(Math.round v1.length).toEqual 1000
       
     describe 'length', ->
