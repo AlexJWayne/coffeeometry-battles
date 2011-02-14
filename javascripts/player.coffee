@@ -8,6 +8,7 @@ class @Player
     40: Vector.down()
   }
   
+  #### Constructor
   constructor: ->
     # Create physics vectors
     @pos   = Vector.zero()
@@ -19,6 +20,7 @@ class @Player
     @dragForce  = 350
     @maxSpeed   = 350
     
+    #### Key events
     # Add the key's direction on key down.
     document.onkeydown = (e) =>
       direction = directionMapping[e.which]
@@ -32,9 +34,11 @@ class @Player
       if direction? && direction.active
         direction.active = no
         @accel.subtract direction.clone().scale(@accelForce)
-    
+  
+  #### Update
+  # Runs each frame to update the player.
   update: ->
-    # Drag
+    # Apply drag
     if @vel.length > @dragForce * Game.perS
       drag = @vel.clone()
       drag.length = @dragForce * Game.perS
@@ -45,20 +49,22 @@ class @Player
     # Accelerate
     @vel.add @accel.clone().scale(Game.perS)
     
-    # Speed limit
+    # Enforce speed limit
     @vel.length = @maxSpeed if @vel.length > @maxSpeed
     
     # Move
     @pos.add @vel.clone().scale(Game.perS)
     
-    # Warp
+    # Warp boundaries
     @pos.x += 200 if @pos.x < -100
     @pos.x -= 200 if @pos.x >  100
     @pos.y += 200 if @pos.y < -100
     @pos.y -= 200 if @pos.y >  100
     
+  #### Render
+  # Runs each frame to render the player
   render: (ctx) ->
-    ctx.setFillColor 'rgb(200,0,0)'
+    ctx.setFillColor 'rgb(200,0,0)' # red
     ctx.fillCircle @pos, 5
     
   
