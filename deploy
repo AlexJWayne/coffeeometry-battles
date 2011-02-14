@@ -1,8 +1,28 @@
 #!/usr/bin/env bash
+
+# Save any pending stuff
 git stash
+
+# Switch over to the gh-pages branch
 git co gh-pages
+
+# Merge in master
 git merge master
+
+# Generate static assets
 ./convert
+
+# Add generated assets
+git add .
+
+# Commit assets
+git commit -m "Updating static assets..."
+
+# Push the changes to github
 git push origin gh-pages
+
+# Switch back to master
 git co master
+
+# Restore any stashed changes
 git stash apply
