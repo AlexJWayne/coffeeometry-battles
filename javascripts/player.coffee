@@ -2,11 +2,17 @@ class @Player
   
   # Create the keycode to direction mapping
   directionMapping = {
-    37: Vector.left()
-    38: Vector.up()
-    39: Vector.right()
-    40: Vector.down()
+    38: Vector.up()                           # UP
+    37: Vector.left()                         # LEFT
+    40: Vector.down()                         # DOWN
+    39: Vector.right()                        # RIGHT
   }
+  
+  # Alias WASD keys to point to the same vector objects
+  directionMapping[87] = directionMapping[38] # W => UP
+  directionMapping[65] = directionMapping[37] # A => LEFT
+  directionMapping[83] = directionMapping[40] # S => DOWN
+  directionMapping[68] = directionMapping[39] # D => RIGHT
   
   #### Constructor
   constructor: ->
@@ -19,6 +25,7 @@ class @Player
     @accelForce = 700
     @dragForce  = 350
     @maxSpeed   = 350
+    @radius     = 5
     
     #### Key events
     # Add the key's direction on key down.
@@ -56,15 +63,27 @@ class @Player
     @pos.add @vel.clone().scale(Game.perS)
     
     # Warp boundaries
-    @pos.x += 200 if @pos.x < -100
-    @pos.x -= 200 if @pos.x >  100
-    @pos.y += 200 if @pos.y < -100
-    @pos.y -= 200 if @pos.y >  100
+    if @pos.x - @radius < -100 && @vel.x < 0
+      @pos.x = -100 + @radius
+      @vel.x *= -1
+    
+    if @pos.x + @radius > 100 && @vel.x > 0
+      @pos.x = 100 - @radius
+      @vel.x *= -1
+    
+    if @pos.y - @radius < -100 && @vel.y < 0
+      @pos.y = -100 + @radius
+      @vel.y *= -1
+    
+    if @pos.y + @radius > 100 && @vel.y > 0
+      @pos.y = 100 - @radius
+      @vel.y *= -1
     
   #### Render
   # Runs each frame to render the player
   render: (ctx) ->
     ctx.setFillColor 'rgb(200,0,0)' # red
-    ctx.fillCircle @pos, 5
+    ctx.strokeStyle = "rgba(0,0,0,0)"
+    ctx.fillCircle @pos, @radius
     
   

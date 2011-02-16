@@ -43,7 +43,9 @@ describe 'Player', ->
       player.update()
       expect(player.pos.length).toBeGreaterThan 0
     
-    it 'should warp the pos to the other side when out of bounds', ->
+    it 'should bounce off stage boundaries', ->
       player.pos = v(0, 101)
+      player.vel = v(0, 50)
       player.update()
-      expect(player.pos.y).toEqual -99
+      expect(player.pos.y).toEqual 95
+      expect(player.vel.y).toBeLessThan 0

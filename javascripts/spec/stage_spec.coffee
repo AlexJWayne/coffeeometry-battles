@@ -14,6 +14,6 @@ describe 'Stage', ->
   describe 'render', ->
     it 'calls player render', ->
       spyOn stage.player, 'render'
-      stage.render()
+      stage.render(Game.game.canvas.ctx)
       expect(stage.player.render).toHaveBeenCalled()
       
