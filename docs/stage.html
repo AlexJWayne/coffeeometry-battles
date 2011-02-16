@@ -6,6 +6,32 @@
     <span class="nx">@player</span><span class="p">.</span><span class="nx">update</span><span class="p">()</span>
     
   <span class="nv">render: </span><span class="nf">(ctx) -&gt;</span>
-    <span class="nx">@player</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+    <span class="nx">@renderGrid</span> <span class="nx">ctx</span>
+    <span class="nx">@player</span><span class="p">.</span><span class="nx">render</span> <span class="nx">ctx</span>
+  
+  <span class="nv">renderGrid: </span><span class="nx">do</span> <span class="o">-&gt;</span>
+    <span class="nv">renderLines = </span><span class="nf">(ctx, spacing, lw) -&gt;</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">()</span>
+      <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">...</span><span class="mi">100</span><span class="p">]</span> <span class="k">by</span> <span class="nx">spacing</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">moveTo</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="nx">i</span><span class="o">-</span><span class="nx">lw</span><span class="err">/2</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">lineTo</span>  <span class="mi">100</span><span class="p">,</span> <span class="nx">i</span><span class="o">-</span><span class="nx">lw</span><span class="err">/2</span>
+      
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">moveTo</span> <span class="nx">i</span><span class="o">-</span><span class="nx">lw</span><span class="err">/2, -100</span>
+        <span class="nx">ctx</span><span class="p">.</span><span class="nx">lineTo</span> <span class="nx">i</span><span class="o">-</span><span class="nx">lw</span><span class="err">/2,  100</span>
+    
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">closePath</span><span class="p">()</span>
+      <span class="nx">ctx</span><span class="p">.</span><span class="nx">stroke</span><span class="p">()</span>
+      
+    <span class="nf">(ctx) -&gt;</span>
+      <span class="nv">lw = </span><span class="mi">200</span><span class="o">/</span><span class="nx">Game</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">node</span><span class="p">.</span><span class="nx">width</span>
+      <span class="nv">ctx.lineWidth   = </span><span class="nx">lw</span>
+      
+      <span class="nv">ctx.strokeStyle = </span><span class="s2">&quot;#333&quot;</span>
+      <span class="nx">renderLines</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">20</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="nx">lw</span>
+            
+      <span class="nv">ctx.strokeStyle = </span><span class="s2">&quot;#444&quot;</span>      
+      <span class="nx">renderLines</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="nx">lw</span>
+      
+      
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
