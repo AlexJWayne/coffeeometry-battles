@@ -56,10 +56,21 @@ class @Player
     @pos.add @vel.clone().scale(Game.perS)
     
     # Warp boundaries
-    @pos.x += 200 if @pos.x < -100
-    @pos.x -= 200 if @pos.x >  100
-    @pos.y += 200 if @pos.y < -100
-    @pos.y -= 200 if @pos.y >  100
+    if @pos.x < -100 && @vel.x < 0
+      @pos.x = -100
+      @vel.x *= -1
+    
+    if @pos.x > 100 && @vel.x > 0
+      @pos.x = 100
+      @vel.x *= -1
+    
+    if @pos.y < -100 && @vel.y < 0
+      @pos.y = -100
+      @vel.y *= -1
+    
+    if @pos.y > 100 && @vel.y > 0
+      @pos.y = 100
+      @vel.y *= -1
     
   #### Render
   # Runs each frame to render the player
