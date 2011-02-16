@@ -46,10 +46,12 @@
         player.update();
         return expect(player.pos.length).toBeGreaterThan(0);
       });
-      return it('should warp the pos to the other side when out of bounds', function() {
+      return it('should bounce off stage boundaries', function() {
         player.pos = v(0, 101);
+        player.vel = v(0, 50);
         player.update();
-        return expect(player.pos.y).toEqual(-99);
+        expect(player.pos.y).toEqual(95);
+        return expect(player.vel.y).toBeLessThan(0);
       });
     });
   });

@@ -18,7 +18,7 @@
     return describe('render', function() {
       return it('calls player render', function() {
         spyOn(stage.player, 'render');
-        stage.render();
+        stage.render(Game.game.canvas.ctx);
         return expect(stage.player.render).toHaveBeenCalled();
       });
     });
