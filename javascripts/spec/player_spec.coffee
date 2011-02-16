@@ -47,5 +47,5 @@ describe 'Player', ->
       player.pos = v(0, 101)
       player.vel = v(0, 50)
       player.update()
-      expect(player.pos.y).toEqual 100
+      expect(player.pos.y).toEqual 95
       expect(player.vel.y).toBeLessThan 0
