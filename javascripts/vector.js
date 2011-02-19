@@ -45,8 +45,11 @@
     return result;
   });
   this.Vector.prototype.__defineSetter__('angle', function(newAngle) {
-    var _ref;
-    return _ref = [Math.cos(newAngle * Math.PI / 180), Math.sin(newAngle * Math.PI / 180), this.length], this.x = _ref[0], this.y = _ref[1], this.length = _ref[2], _ref;
+    var oldLength;
+    oldLength = this.length;
+    this.x = Math.cos(newAngle * Math.PI / 180);
+    this.y = Math.sin(newAngle * Math.PI / 180);
+    return this.length = oldLength;
   });
   this.Vector.prototype.__defineGetter__('length', function() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
