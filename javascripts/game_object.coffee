@@ -2,6 +2,8 @@ class @GameObject
   
   #### Constructor
   constructor: ->
+    @color = 'rgb(200, 0, 0)'
+    
     # Create physics vectors
     @pos   = Vector.zero()
     @vel   = Vector.zero()
@@ -53,6 +55,6 @@ class @GameObject
   #### Render
   # Runs each frame to render the player
   render: (ctx) ->
-    ctx.setFillColor 'rgb(200,0,0)' # red
+    ctx.setFillColor @color
     ctx.strokeStyle = "rgba(0,0,0,0)"
     ctx.fillCircle @pos, @radius

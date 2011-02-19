@@ -3,7 +3,11 @@ describe 'Stage', ->
   beforeEach -> stage = Game.game.stage
   
   it 'should have a player', ->
-    expect(stage.player).toBeTruthy
+    expect(stage.player).toBeTruthy()
+  
+  it 'should have an array of game objects', ->
+    expect(stage.gameObjects).toBeTruthy()
+    expect(_.include(stage.gameObjects, stage.player)).toBeTruthy()
     
   describe 'update', ->
     it 'calls player update', ->

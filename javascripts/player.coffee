@@ -17,6 +17,7 @@ class @Player extends GameObject
   #### Constructor
   constructor: ->
     super()
+    @color = 'rgb(0, 200, 0)'
     
     #### Key events
     # Key handler
