@@ -2,7 +2,7 @@
   var __slice = Array.prototype.slice, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   this.Game = (function() {
     var requires;
-    requires = ['lib/underscore', 'vector', 'canvas', 'stage', 'player'];
+    requires = ['lib/underscore', 'vector', 'canvas', 'stage', 'game_object', 'player'];
     function Game() {
       Game.game = this;
       this.load();

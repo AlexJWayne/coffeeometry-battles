@@ -6,7 +6,11 @@
       return stage = Game.game.stage;
     });
     it('should have a player', function() {
-      return expect(stage.player).toBeTruthy;
+      return expect(stage.player).toBeTruthy();
+    });
+    it('should have an array of game objects', function() {
+      expect(stage.gameObjects).toBeTruthy();
+      return expect(_.include(stage.gameObjects, stage.player)).toBeTruthy();
     });
     describe('update', function() {
       return it('calls player update', function() {
