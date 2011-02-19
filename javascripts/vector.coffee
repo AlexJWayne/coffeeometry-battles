@@ -14,19 +14,19 @@ class @Vector
   add: (other) ->
     @x += other.x
     @y += other.y
-    @
+    this
   
   # Subtract another vector to this one
   subtract: (other) ->
     @x -= other.x
     @y -= other.y
-    @
+    this
   
   # Scale this vector by a scalar value
   scale: (scalar) ->
     @x *= scalar
     @y *= scalar
-    @
+    this
   
   # Make the vector length one
   normalize: ->
@@ -57,12 +57,10 @@ class @Vector
 
 # Set the angle of this vector, keeping its current length
 @Vector::__defineSetter__ 'angle', (newAngle) ->
-  [@x, @y, @length] = [
-    Math.cos(newAngle * Math.PI/180),
-    Math.sin(newAngle * Math.PI/180),
-    @length
-  ]
-  
+  oldLength = @length
+  @x = Math.cos(newAngle * Math.PI/180)
+  @y = Math.sin(newAngle * Math.PI/180)
+  @length = oldLength
 
 # Return the length of this vector
 @Vector::__defineGetter__ 'length', ->
