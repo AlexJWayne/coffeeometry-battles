@@ -9,6 +9,7 @@ class @Game
     'vector'
     'canvas'
     'stage'
+    'game_object'
     'player'
   ]
   
