@@ -17,7 +17,11 @@ class @Player extends GameObject
   #### Constructor
   constructor: ->
     super()
-    @color = 'rgb(0, 200, 0)'
+    @color  = 'rgb(0, 200, 0)'
+    @radius = 4
+    
+    @firing = no
+    @firingTarget = Vector.zero()
     
     #### Key events
     # Key handler
@@ -32,15 +36,32 @@ class @Player extends GameObject
     
     # Subtract the key's direction on key up.
     document.onkeyup   = _(handleKey).bind(this, false)
+    
+    Game.game.canvas.node.onmousemove = (e) =>
+      @firingTarget.x = e.offsetX
+      @firingTarget.y = e.offsetY
+    
+    Game.game.canvas.node.onmousedown = (e) =>
+      @firing = yes
+      
+    document.onmouseup = (e) =>
+      @firing = no
+    
   
   #### Update
   # Runs each frame to update the player.
   update: ->
     super()
-    
+    @fire()
+  
+  # Create a bullet and shoot it
+  fire: ->
+    if @firing
+      bullet = new Bullet @pos, Game.game.canvas.toGamePos(@firingTarget)
+      Game.game.stage.gameObjects.push bullet
+  
   #### Render
   # Runs each frame to render the player
   render: (ctx) ->
     super(ctx)
-    
   

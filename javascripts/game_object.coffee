@@ -13,7 +13,7 @@ class @GameObject
     @accelForce = 700
     @dragForce  = 350
     @maxSpeed   = 350
-    @radius     = 5
+    @radius     = 3
     
   #### Update
   # Runs each frame to update the player.

@@ -3,7 +3,8 @@ body {
   background: black;
   font-family: "Orbitron", arial, serif;
   text-align: center;
-  font-size: 14px; }
+  font-size: 14px;
+  -webkit-user-select: none; }
 
 canvas#canvas {
   width: 600px;
