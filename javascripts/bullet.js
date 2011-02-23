@@ -16,10 +16,11 @@
       this.color = 'rgb(255, 255, 0)';
       this.vel = target.clone().subtract(this.pos);
       this.vel.length = 500;
+      this.vel.angle += Math.random() * 5 - 2.5;
     }
     Bullet.prototype.update = function() {
       Bullet.__super__.update.call(this);
-      if (this.vel.length < 100) {
+      if (this.vel.length < 50) {
         return Game.game.stage.gameObjects = _(Game.game.stage.gameObjects).without(this);
       }
     };
