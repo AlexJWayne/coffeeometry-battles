@@ -6,7 +6,7 @@
     child.prototype = new ctor;
     child.__super__ = parent.prototype;
     return child;
-  };
+  }, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   this.Player = (function() {
     var directionMapping;
     __extends(Player, GameObject);
@@ -24,6 +24,9 @@
       var handleKey;
       Player.__super__.constructor.call(this);
       this.color = 'rgb(0, 200, 0)';
+      this.radius = 4;
+      this.firing = false;
+      this.firingTarget = Vector.zero();
       handleKey = function(isDown, e) {
         var direction;
         direction = directionMapping[e.which];
@@ -34,9 +37,27 @@
       };
       document.onkeydown = _(handleKey).bind(this, true);
       document.onkeyup = _(handleKey).bind(this, false);
+      Game.game.canvas.node.onmousemove = __bind(function(e) {
+        this.firingTarget.x = e.offsetX;
+        return this.firingTarget.y = e.offsetY;
+      }, this);
+      Game.game.canvas.node.onmousedown = __bind(function(e) {
+        return this.firing = true;
+      }, this);
+      document.onmouseup = __bind(function(e) {
+        return this.firing = false;
+      }, this);
     }
     Player.prototype.update = function() {
-      return Player.__super__.update.call(this);
+      Player.__super__.update.call(this);
+      return this.fire();
+    };
+    Player.prototype.fire = function() {
+      var bullet;
+      if (this.firing) {
+        bullet = new Bullet(this.pos, Game.game.canvas.toGamePos(this.firingTarget));
+        return Game.game.stage.gameObjects.push(bullet);
+      }
     };
     Player.prototype.render = function(ctx) {
       return Player.__super__.render.call(this, ctx);

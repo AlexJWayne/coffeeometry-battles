@@ -10,6 +10,9 @@
     Canvas.prototype.clear = function() {
       return this.ctx.clearRect(-100, -100, 200, 200);
     };
+    Canvas.prototype.toGamePos = function(screenPos) {
+      return v(200 * screenPos.x / this.node.width - 100, 200 * -screenPos.y / this.node.height + 100);
+    };
     return Canvas;
   })();
   CanvasRenderingContext2D.prototype.fillCircle = function(center, radius) {

@@ -50,7 +50,7 @@
         obj.pos = v(0, 101);
         obj.vel = v(0, 50);
         obj.update();
-        expect(obj.pos.y).toEqual(95);
+        expect(obj.pos.y).toEqual(97);
         return expect(obj.vel.y).toBeLessThan(0);
       });
     });

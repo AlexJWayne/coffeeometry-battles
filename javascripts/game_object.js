@@ -8,7 +8,7 @@
       this.accelForce = 700;
       this.dragForce = 350;
       this.maxSpeed = 350;
-      this.radius = 5;
+      this.radius = 3;
     }
     GameObject.prototype.update = function() {
       var drag;
