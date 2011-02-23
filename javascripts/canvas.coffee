@@ -14,7 +14,13 @@ class @Canvas
   # Draw one frame
   clear: ->
     @ctx.clearRect -100, -100, 200, 200
-
+  
+  toGamePos: (screenPos) ->
+    v(
+      200 *  screenPos.x/@node.width  - 100
+      200 * -screenPos.y/@node.height + 100
+    )
+  
 #### CanvasRenderingContext2D Extensions
 
 # Draw a circle filled with the current fill color.

@@ -11,6 +11,7 @@ class @Game
     'stage'
     'game_object'
     'player'
+    'bullet'
   ]
   
   # Create the singleton instance.
