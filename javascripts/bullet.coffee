@@ -7,10 +7,11 @@ class @Bullet extends GameObject
     
     @vel = target.clone().subtract @pos
     @vel.length = 500
+    @vel.angle += Math.random() * 5 - 2.5
     
   update: ->
     super()
-    if @vel.length < 100
+    if @vel.length < 50
       Game.game.stage.gameObjects = _(Game.game.stage.gameObjects).without this
     
     
